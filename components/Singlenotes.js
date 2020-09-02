@@ -2,9 +2,10 @@ import React from 'react';
 import { StyleSheet,Text, View } from 'react-native';
 
 const Singlenotes=(props)=>
-{    
+{   
     return <View backgroundColor={Randomcolor()} style={styles.textview}>
-      <Text style={styles.text}>{props.Mynotes}</Text>
+        <Text>{props.Mynotedate.toDateString()}</Text>
+      <Text style={styles.text}>{props.Mynotesname}</Text>
     </View>
 }
 

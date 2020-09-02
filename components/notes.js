@@ -1,28 +1,49 @@
-import React from 'react';
-import { StyleSheet,FlatList,Text, View } from 'react-native';
+import React,{useState} from 'react';
+import { StyleSheet,FlatList,Text,TextInput, View,Image ,Button} from 'react-native';
 import Singlenotes from './Singlenotes'
+import Createnote from './Createnote'
+import firebase from 'firebase'
 export default function Notes(){
-    const Note=[
-        {"age":"25","name":"you know who i am  ha ha..iamgope",key:"1"},
-        {"age":"25","name":"you know who i am  ha ha..iamgope",key:"2"},
-        {"age":"25","name":"you know who i am  ha ha..iamgope",key:"3"},
-        {"age":"25","name":"you know who i am  ha ha..iamgope",key:"4"},
-        {"age":"25","name":"you know who i am  ha ha..iamgope",key:"5"},
-        {"age":"25","name":"you know who i am  ha ha..iamgope",key:"6"},
-        {"age":"25","name":"you know who i am  ha ha..iamgope",key:"7"},
-        {"age":"25","name":"you know who i am  ha ha..iamgope",key:"8"},
-        {"age":"25","name":"you know who i am  ha ha..iamgope",key:"9"},
-        {"age":"25","name":"you know who i am  ha ha..iamgope",key:"10"},
-        {"age":"25","name":"you know who i am  ha ha..iamgope",key:"11"}
-    ]
-    return <View>
+  
+    const[Note,SetNote]=useState([
+        //{name:'aman vaaai',date:"10-12-14"},
+        //{name:'aman vaaai',date:"10-12-15"},
+        //{name:'aman vaaai',date:"10-12-16"}
+    ]);
+    const addNewNote=(text)=>
+    { if(text.length>0){
+     //   SetNote([...Note,{'name':{text},'Date':new Date()}])
+     SetNote((prevdata)=>{
+         
+         return [
+            {name:text,date:new Date()}
+            ,...prevdata
+         ];
+     })
+    }
+    }
+
+
+    
+    return <View style={styles.viewstyle}>
+         <Button
+   title="logout"
+   onPress={()=>{
+        firebase.auth().signOut()
+   }}
+   />
+        <Createnote addNewNote={addNewNote}/>
         <FlatList
         showsVerticalScrollIndicator={false}
         data={Note}
+        keyExtractor={(item, index) => {
+            return index.toString()
+        }
+    }
         numColumns={2}
         
        renderItem={({item})=>{
-     return <Singlenotes Mynotes={item.name}/>
+     return <Singlenotes Mynotedate={item.date} Mynotesname={item.name}/>
        }
 }
 />
@@ -36,6 +57,7 @@ const Randomcolor=()=>{
     return `rgb(${red},${green},${blue})`
 }
 const styles=StyleSheet.create({
+
     text:{
     
         paddingHorizontal:12,
@@ -43,6 +65,9 @@ const styles=StyleSheet.create({
         
     
         
+    },
+    viewstyle:{
+     alignItems:'center'
     },
     textview:{
         height:150,
@@ -52,6 +77,11 @@ const styles=StyleSheet.create({
         padding:5,
         alignItems:'center',
         justifyContent:'center'
-    }
+    },
+    
+       
+     // alignContent:'center',
+    // alignItems:'center' 
+    
     
 });
