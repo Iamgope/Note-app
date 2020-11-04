@@ -9,7 +9,7 @@ export default function App() {
   const [userLoggedIn,setuserLoggedIn]=useState(false)
   if (firebase.apps.length===0){
   var firebaseConfig = {
-    apiKey: "AIzaSyBv7nhFNyEvmzH58b7jidYl1dc8XyTcb1w",
+    apiKey: "ye_nai_bataunga",
     authDomain: "rn-notes-00.firebaseapp.com",
     databaseURL: "https://rn-notes-00.firebaseio.com",
     projectId: "rn-notes-00",
